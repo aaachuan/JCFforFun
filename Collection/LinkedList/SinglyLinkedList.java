@@ -3,7 +3,7 @@ package com.aaachuan.collection;
 import java.util.NoSuchElementException;
 
 /**
- * 
+ *
  * @param <E>
  */
 public class SinglyLinkedList<E> {
@@ -11,6 +11,18 @@ public class SinglyLinkedList<E> {
     private int size = 0;
     private Node<E> first;
     private Node<E> last;
+
+    public int getSize() {
+        return size;
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    public boolean contains(E element) {
+        return true;
+    }
 
 
     public void add(E element) {
@@ -22,6 +34,22 @@ public class SinglyLinkedList<E> {
         else
             oldLast.next = newNode;
         size++;
+    }
+
+    public E get(int index) {
+        return null;
+    }
+
+    public E set(int index, E element) {
+        return null;
+    }
+
+    public void add(int index, E element) {
+
+    }
+
+    public E remove(int index) {
+        return null;
     }
 
     public E removeLast() {
@@ -46,6 +74,13 @@ public class SinglyLinkedList<E> {
 
     }
 
+    public int index(E element) {
+        return 0;
+    }
+
+    public void clear() {
+        
+    }
 
     @Override
     public String toString() {
