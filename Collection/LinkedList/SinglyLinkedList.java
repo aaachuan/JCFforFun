@@ -1,5 +1,6 @@
 package com.aaachuan.collection;
 
+import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
 /**
@@ -21,9 +22,14 @@ public class SinglyLinkedList<E> {
     }
 
     public boolean contains(E element) {
-        return true;
+        if(size == 0)
+            return false;
+        for (Node<E> x = first; x != null; x = x.next) {
+            if ((x.value).equals(element))
+                return true;
+        }
+        return false;
     }
-
 
     public void add(E element) {
         Node<E> oldLast = last;
@@ -37,15 +43,26 @@ public class SinglyLinkedList<E> {
     }
 
     public E get(int index) {
-        return null;
+        indexCheck(index);
+        Node<E> x = first;
+        for (int i = 0; i < index; i++)
+            x = x.next;
+        return x.value;
     }
 
     public E set(int index, E element) {
-        return null;
+        indexCheck(index);
+        Node<E> x = first;
+        for (int i = 0; i < index; i++)
+            x = x.next;
+        E oldValue = x.value;
+        x.value = element;
+        return oldValue;
     }
 
     public void add(int index, E element) {
-
+        indexCheck(index);
+        
     }
 
     public E remove(int index) {
@@ -80,6 +97,11 @@ public class SinglyLinkedList<E> {
 
     public void clear() {
         
+    }
+
+    private void indexCheck(int index) {
+        if (index < 0 || index > size)
+            throw new IndexOutOfBoundsException("索引值越界");
     }
 
     @Override
