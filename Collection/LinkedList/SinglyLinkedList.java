@@ -62,11 +62,30 @@ public class SinglyLinkedList<E> {
 
     public void add(int index, E element) {
         indexCheck(index);
-        
+        if (index > size + 1)
+            throw new IndexOutOfBoundsException("元素索引超出元素大小越界");
+        Node<E> x = first;
+        for (int i = 0; i < index; i++)
+            x = x.next;
+        Node<E> newNode = new Node<>(element,x.next);
+        x.next = newNode;
+        size++;
+
     }
 
     public E remove(int index) {
-        return null;
+        indexCheck(index);
+        Node<E> x = first;
+        for (int i = 0; i < index - 1; i++) {
+            x = x.next;
+        }
+        Node<E> frontNode = x;
+        Node<E> removeNode = x.next;
+        frontNode.next = removeNode.next;
+        E  removeValue = removeNode.value;
+        removeNode = null;
+        size--;
+        return removeValue;
     }
 
     public E removeLast() {
@@ -92,10 +111,21 @@ public class SinglyLinkedList<E> {
     }
 
     public int index(E element) {
-        return 0;
+        int count = 0;
+        for (Node<E> x = first; x != null; x = x.next) {
+            count++;
+            if (x.value.equals(element))
+                break;
+        }
+        return count;
     }
 
     public void clear() {
+        for (Node<E> x = first; x != null; x = x.next) {
+            x = null;
+            if (x.next == null)
+                break;
+        }
         
     }
 
