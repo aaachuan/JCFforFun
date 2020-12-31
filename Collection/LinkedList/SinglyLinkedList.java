@@ -1,6 +1,6 @@
 package com.aaachuan.collection;
 
-import java.util.LinkedList;
+
 import java.util.NoSuchElementException;
 
 /**
