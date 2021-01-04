@@ -31,6 +31,19 @@ public class SinglyLinkedListV2<E> {
     }
 
     /**
+     * 指定索引节点修改元素
+     * @param index
+     * @param value
+     * @return
+     */
+    public E set(int index, E value) {
+        indexCheck(index);
+        Node<E> oldNode =  node(index);
+        E oldValue = oldNode.value;
+        oldNode.value = value;
+        return oldValue;
+    }
+    /**
      * 索引越界检查
      * index应满足(index >= 0 && index < size)
      * @param index
