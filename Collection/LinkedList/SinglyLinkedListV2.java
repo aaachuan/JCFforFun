@@ -1,7 +1,6 @@
 package com.aaachuan.collection;
 
 
-import java.util.LinkedList;
 
 public class SinglyLinkedListV2<E> {
     //链表长度
