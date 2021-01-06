@@ -67,6 +67,24 @@ public class SinglyLinkedListV2<E> {
         size = 0;
     }
 
+    public int indexOf(E value) {
+        int index = 0;
+        if (value == null) {
+            for (Node<E> x = first; x != null;  x = x.next) {
+                if (x.value == null)
+                    return index;
+            }
+            index++;
+        } else {
+            for (Node<E> x = first; x != null; x = x.next) {
+                if (value.equals(x.value))
+                    return index;
+            }
+            index++;
+        }
+        return -1;
+    }
+
     /**
      * 索引越界检查
      * index应满足(index >= 0 && index < size)
