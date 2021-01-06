@@ -67,8 +67,14 @@ public class SinglyLinkedListV2<E> {
         size = 0;
     }
 
+    /**
+     * 通过元素定位索引
+     * @param value
+     * @return
+     */
     public int indexOf(E value) {
         int index = 0;
+        //需要区分判别是否为null，equals时value.equals(x.value)前后位置不可互换，因value已不可能为null，而x.value为null的话调用会报空指针异常
         if (value == null) {
             for (Node<E> x = first; x != null;  x = x.next) {
                 if (x.value == null)
@@ -83,6 +89,65 @@ public class SinglyLinkedListV2<E> {
             index++;
         }
         return -1;
+    }
+
+    /**
+     * 判断链表是否包含该元素
+     * @param value
+     * @return
+     */
+    public boolean contains(E value) {
+        return indexOf(value) != -1;
+    }
+
+    /**
+     * 指定索引位置插入元素，这里index插入位置比元素多一个位置，所以index可以取size长度
+     * @param index
+     * @param value
+     */
+    public void add(int index, E value) {
+        //此时允许index值为size
+        if (index < 0 || index > size)
+            throw new IndexOutOfBoundsException("索引值越界: index:" + index + ",size:" + size);
+        if (index == 0) {
+            //first = new Node<>(value, first);
+           Node<E> newNode = new Node<>(value, first);
+           first = newNode;
+        } else {
+            Node<E> pre = node(index - 1);
+            Node<E> next = pre.next;
+            //下面两步可合并成
+            //pre.next = new Node<>(value, next);
+            Node<E> newNode = new Node<>(value, next);
+            pre.next = newNode;
+        }
+        size++;
+    }
+
+    /**
+     * 默认即最后一个位置插入
+     * @param value
+     */
+    public void add(E value) {
+        add(size, value);
+    }
+
+    /**
+     * 通过索引移除元素
+     * @param index
+     * @return
+     */
+    public E remove(int index) {
+        indexCheck(index);
+        Node<E> oldNode = first;
+        if (index == 0) {
+            first = first.next;
+        } else {
+            Node<E> pre = node(index - 1);
+            oldNode = pre.next;
+            pre.next = oldNode.next;
+        }
+        return oldNode.value;
     }
 
     /**
@@ -106,5 +171,19 @@ public class SinglyLinkedListV2<E> {
             x = x.next;
         }
         return x;
+    }
+
+    @Override
+    public String toString() {
+        if (size == 0)
+            return "[]";
+        StringBuilder sb = new StringBuilder().append("[");
+        for (Node<E> x = first; x != null; x = x.next) {
+            sb.append(x.value);
+            if (x.next == null)
+                return sb.append("]").toString();
+            sb.append(",");
+        }
+        return sb.toString();
     }
 }
