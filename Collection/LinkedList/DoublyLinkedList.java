@@ -34,6 +34,7 @@ public class DoublyLinkedList<E> {
         return node(index).value;
     }
 
+
     /**
      * 指定索引节点修改元素
      * @param index
@@ -46,6 +47,23 @@ public class DoublyLinkedList<E> {
         E oldValue = oldNode.value;
         oldNode.value = value;
         return oldValue;
+    }
+
+    public void clear() {
+        // Clearing all of the links between nodes is "unnecessary", but:
+        // - helps a generational GC if the discarded nodes inhabit
+        //   more than one generation
+        // - is sure to free memory even if there is a reachable Iterator
+        for (Node<E> x = first; x != null; ) {
+            Node<E> next = x.next;
+            x.value = null;
+            x.next = null;
+            x.pre = null;
+            x = next;
+        }
+        first = null;
+        last = null;
+        size = 0;
     }
 
     /**
