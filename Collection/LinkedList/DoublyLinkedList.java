@@ -49,6 +49,32 @@ public class DoublyLinkedList<E> {
         return oldValue;
     }
 
+    public void add(int index, E value) {
+        //此时允许index值为size
+        if (index < 0 || index > size)
+            throw new IndexOutOfBoundsException("索引值越界: index:" + index + ",size:" + size);
+        if (index == size) {
+            Node<E> l = last;
+            Node<E> newNode = new Node<>(value, l, null);
+            last = newNode;
+            if (l == null) {
+                first = newNode;
+            } else {
+                l.next = newNode;
+            }
+
+
+        } else {
+            Node<E> currNode = node(index);
+            Node<E> preNode = currNode.pre;
+            Node<E> newNode = new Node<>(value, preNode, currNode);
+            preNode.next = newNode;
+            preNode.pre = newNode;
+        }
+
+        size++;
+
+    }
     public void clear() {
         // Clearing all of the links between nodes is "unnecessary", but:
         // - helps a generational GC if the discarded nodes inhabit
