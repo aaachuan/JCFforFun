@@ -1,7 +1,5 @@
 package com.aaachuan.collection;
 
-import java.util.Arrays;
-
 /**
  * 重写ArrayList
  * @param <E>
